@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <img src="images/Netflix-Logo-2014-present-removebg-preview.png" alt="Netflix Logo">
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="serial.html">Serial TV</a></li>
+          <li><a href="film.html">Film</a></li>
+          <li><a href="terbaru.html">Terbaru & Populer</a></li>
+        </ul>
+      </header>
+    
+    <div class="coming-soon-container">
+        <h1 class="coming-soon-text">COMING SOON</h1>
+      </div>
+
+      <style>
+.coming-soon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+    overflow: hidden;
+}
+
+/* Efek melengkung dengan distorsi */
+.coming-soon-text {
+    font-size: 5rem;
+    font-weight: bold;
+    color: red;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 5px;
+    position: relative;
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+    
+    /* Efek melengkung */
+    transform: perspective(500px) rotateX(20deg) rotateY(-15deg) skewX(-10deg);
+    
+    /* Animasi cahaya dari kiri ke kanan */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), red, rgba(255, 255, 255, 0.1));
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: light-move 3s infinite linear;
+}
+
+/* Animasi cahaya bergerak */
+@keyframes light-move {
+    0% {
+        text-shadow: -100px 0px 30px rgba(255, 0, 0, 0.6);
+    }
+    50% {
+        text-shadow: 0px 0px 50px rgba(255, 0, 0, 1);
+    }
+    100% {
+        text-shadow: 100px 0px 30px rgba(255, 0, 0, 0.6);
+    }
+}
+
+      </style>
+    
+</body>
+</html>
