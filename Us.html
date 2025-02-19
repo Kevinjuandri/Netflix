@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <img src="imagesNet/Netflix-Logo-2014-present-removebg-preview.png" alt="Netflix Logo">
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="Us.html">Us</a></li>
+          <li><a href="Randomscene.html">Random scene</a></li>
+        </ul>
+      </header>
+    
+      <section class="section">
+        <h2>First Date</h2>
+        <div class="carousel-container">
+        <button class="carousel-btn left-btn">&#10094;</button>
+        <div class="carousel">
+            <div class="First-date">
+                <img src="imagesUS/first1.jpg" alt="first1">
+        </div> 
+            <div class="First-date">
+                <img src="imagesUS/first2.jpg" alt="first2">
+        </div>   
+            <div class=" First-date">
+                <img src="imagesUS/first3.jpg" alt="first3">
+        </div>      
+            <div class="First-date">
+                <img src="imagesUS/first4.jpg" alt="first4">
+        </div>        
+            <div class="First-date">
+                <img src="imagesUS/first5.jpg" alt="first5">
+        </div>       
+            <div class="First-date">
+                <img src="imagesUS/first6.jpg" alt="first6">
+        </div> 
+            <div class="First-date">
+                <img src="imagesUS/first7.jpg" alt="first7">
+        </div>
+
+        </div>
+        <button class="carousel-btn right-btn">&#10095;</button>
+
+      </section>
+
+      <section class="section">
+        <h2>Mixue</h2>
+        <div class="carousel-container">
+        <button class="carousel-btn left-btn">&#10094;</button>
+        <div class="carousel">
+            <div class="First-date">
+                <img src="imagesUS/mixue1.jpg" alt="first1">
+        </div> 
+            <div class="First-date">
+                <img src="imagesUS/mixue2.jpg" alt="first2">
+        </div>   
+            <div class=" First-date">
+                <img src="imagesUS/mixue3.jpg" alt="first3">
+        </div>      
+            <div class="First-date">
+                <img src="imagesUS/mixue4.jpg" alt="first4">
+        </div>        
+            <div class="First-date">
+                <img src="imagesUS/mixue5.jpg" alt="first5">
+        </div>       
+            <div class="First-date">
+                <img src="imagesUS/mixue6.jpg" alt="first6">
+        </div> 
+            <div class="First-date">
+                <img src="imagesUS/mixue7.jpg" alt="first7">
+        </div>
+
+        </div>
+        <button class="carousel-btn right-btn">&#10095;</button>
+
+      </section>
+
+      <section class="section">
+        <h2>Happy birtdhay Kevin</h2>
+        <div class="carousel-container">
+        <button class="carousel-btn left-btn">&#10094;</button>
+        <div class="carousel">
+            <div class="First-date">
+                <img src="imagesUS2/HBDKEVIN1.jpg" alt="first1">
+        </div> 
+            <div class="First-date">
+                <img src="imagesUS2/HBDKEVIN2.jpg" alt="first2">
+        </div>   
+            <div class=" First-date">
+                <img src="imagesUS2/HBDKEVIN3.jpg" alt="first3">
+        </div>      
+            <div class="First-date">
+                <img src="imagesUS2/HBDKEVIN4.jpg" alt="first4">
+        </div>        
+            <div class="First-date">
+                <img src="imagesUS2/HBDKEVIN5.jpg" alt="first5">
+        </div>       
+            <div class="First-date">
+                <img src="imagesUS2/HBDKEVIN6.jpg" alt="first6">
+        </div> 
+            <div class="First-date">
+                <img src="imagesUS2/HBDKEVIN7.jpg" alt="first7">
+        </div>
+
+        </div>
+        <button class="carousel-btn right-btn">&#10095;</button>
+
+      </section>
+
+      <style>
+
+        /* Reset & Gaya Umum */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background-color: #141414;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+     /* Navbar */
+     .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(20,20,20,0.9) 80%, transparent);
+        }
+        .navbar img {
+            width: 120px;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+        .navbar ul li {
+            margin-left: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .navbar ul li a:hover {
+            color: #e50914;
+            transition: color 0.3s ease-in-out;
+        }
+  
+
+        .section {
+            padding: 0 40px;
+            margin: 40px 0;
+            margin-top: 100px;
+        }
+
+        .section h2 {
+            margin-bottom: 10px;
+        }
+        
+        .carousel-container {
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+        }
+
+        .carousel ::-webkit-scrollbar {
+            display : none;
+        }
+        
+        .First-date {
+            min-width: 200px;
+            transition: transform 0.3s;
+        }
+
+        .First-date img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  .First-date:hover {
+    transform: scale(1.08);
+  }
+  
+  /* Carousel Buttons */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(20, 20, 20, 0.7);
+    border: none;
+    color: #fff;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+  }
+  .left-btn {
+    left: 0;
+  }
+  .right-btn {
+    right: 0;
+  }
+  
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000;
+    font-size: 14px;
+    margin-top: 40px;
+  }
+  
+  /* Responsif */
+  @media (max-width: 768px) {
+    .banner-content h1 {
+      font-size: 32px;
+    }
+    .banner-content p {
+      font-size: 16px;
+    }
+    .navbar ul li {
+      font-size: 14px;
+    }
+  }
+      </style>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const carousels = document.querySelectorAll(".carousel-container");
+
+        carousels.forEach(container => {
+            const carousel = container.querySelector(".carousel");
+            const leftBtn = container.querySelector(".left-btn");
+            const rightBtn = container.querySelector(".right-btn");
+
+            rightBtn.addEventListener("click", function () {
+                carousel.scrollBy({ left: 220, behavior: "smooth" }); // Geser ke kanan
+            });
+
+            leftBtn.addEventListener("click", function () {
+                carousel.scrollBy({ left: -220, behavior: "smooth" }); // Geser ke kiri
+            });
+        });
+    });
+    </script>
+</body>
+</html>

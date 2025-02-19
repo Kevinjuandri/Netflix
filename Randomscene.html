@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Scene</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Background */
+        body {
+            background-color: #141414;
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(20,20,20,0.9) 80%, transparent);
+        }
+        .navbar img {
+            width: 120px;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+        .navbar ul li {
+            margin-left: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .navbar ul li a:hover {
+            color: #e50914;
+            transition: color 0.3s ease-in-out;
+        }
+
+        /* Container */
+        .random-scene-container {
+            margin-top: 100px;
+            padding: 20px;
+        }
+        .random-scene-container h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e50914;
+        }
+
+        /* Carousel */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            max-width: 90%;
+            margin: auto;
+        }
+        .carousel {
+            display: flex;
+            gap: 15px;
+            transition: transform 0.5s ease-in-out;
+        }
+        .video-card {
+            position: relative;
+            width: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .video-card:hover {
+            transform: scale(1.05);
+        }
+        .video-card video {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+        .video-card:hover .play-button {
+            opacity: 1;
+        }
+
+        /* Navigasi */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(20, 20, 20, 0.7);
+            border: none;
+            color: #fff;
+            font-size: 30px;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .left-btn {
+            left: -20px;
+        }
+        .right-btn {
+            right: -20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <img src="imagesNet/Netflix-Logo-2014-present-removebg-preview.png" alt="Netflix Logo">
+        <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="serial.html">Serial TV</a></li>
+            <li><a href="film.html">Film</a></li>
+            <li><a href="randomscene.html">Random Scene</a></li>
+        </ul>
+    </header>
+
+    <!-- Random Scene -->
+    <div class="random-scene-container">
+        <h1>Random Scene</h1>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="video-card">
+                    <video id="video1" src="videos/Random.mp4" poster="images/poster1.jpg"></video>
+                    <button class="play-button" onclick="playVideo('video1')">▶</button>
+                </div>
+                <div class="video-card">
+                    <video id="video2" src="videos/Random.mp4" poster="images/poster2.jpg"></video>
+                    <button class="play-button" onclick="playVideo('video2')">▶</button>
+                </div>
+                <div class="video-card">
+                    <video id="video3" src="videos/Random.mp4" poster="images/poster3.jpg"></video>
+                    <button class="play-button" onclick="playVideo('video3')">▶</button>
+                </div>
+                <div class="video-card">
+                    <video id="video4" src="videos/Random.mp4" poster="images/poster4.jpg"></video>
+                    <button class="play-button" onclick="playVideo('video4')">▶</button>
+                </div>
+                <div class="video-card">
+                    <video id="video5" src="videos/Random.mp4" poster="images/poster5.jpg"></video>
+                    <button class="play-button" onclick="playVideo('video5')">▶</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const carousel = document.querySelector(".carousel");
+        const totalVideos = document.querySelectorAll(".video-card").length;
+        const visibleVideos = 3; // Video yang terlihat dalam satu layar
+        const videoWidth = 315; // Lebar video + margin
+
+        function moveCarousel(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = 0;
+            if (currentIndex > totalVideos - visibleVideos) currentIndex = totalVideos - visibleVideos;
+            carousel.style.transform = `translateX(-${currentIndex * videoWidth}px)`;
+        }
+
+        function playVideo(videoId) {
+            let video = document.getElementById(videoId);
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        }
+    </script>
+
+</body>
+</html>
