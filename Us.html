@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Scroll Animation Wheel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: black;
+            overflow: hidden;
+            position: relative;
+            flex-direction: column;
+        }
+        .pink-mode {
+            background: pink !important;
+        }
+                
+        .toggle-mode {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 200;
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(20,20,20,0.9) 10%, transparent);
+        }
+  .navbar img {
+    width: 120px;
+  }
+  .navbar ul {
+    list-style: none;
+    display: flex;
+}
+
+.navbar ul li {
+    margin-left: 20px;
+}
+
+.navbar ul li a {
+    text-decoration: none; /* Menghilangkan garis bawah */
+    color: white; /* Warna teks putih */
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar ul li a:hover {
+    color: #e50914; /* Warna merah saat di-hover */
+}
+
+.carousel-container {
+    position: relative;
+    width: 60vw;
+    height: 180px; /* Tambah tinggi agar lebih proporsional */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    overflow: hidden;
+}
+
+.carousel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+.carousel img {
+    position: absolute;
+    width: 260px;
+    height: 160px;
+    object-fit: cover; /* Jaga proporsi gambar */
+    border-radius: 15px;
+    transition: transform 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease;
+    transform-origin: center;
+    opacity: 0.5;
+    cursor: pointer;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.carousel img.active {
+    opacity: 1;
+    transform: scale(1.2);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 8px 25px rgba(255, 255, 255, 0.4);
+}
+
+    </style>
+</head>
+<body>
+    <button class="toggle-mode">Pink Mode</button>
+    <header class="navbar">
+        <img src="imagesNet/Netflix-Logo-2014-present-removebg-preview.png" alt="Netflix Logo">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Us.html">Us</a></li>
+            <li><a href="Randomscene.html">Random</a></li>
+        </ul>
+    </header>
+    
+    <div class="carousel-container">
+        <div class="carousel">
+            <img src="imagesUS/first1.jpg" alt="first1">
+            <img src="imagesUS/first2.jpg" alt="first2">
+            <img src="imagesUS/first3.jpg" alt="first3">
+            <img src="imagesUS/first4.jpg" alt="first4">
+            <img src="imagesUS/first5.jpg" alt="first5">
+            <img src="imagesUS/first6.jpg" alt="first6">
+            <img src="imagesUS/first7.jpg" alt="first7">
+            <img src="imagesUS/mixue1.jpg" alt="mixue1">
+            <img src="imagesUS/mixue2.jpg" alt="mixue2">
+            <img src="imagesUS/mixue3.jpg" alt="mixue3">
+            <img src="imagesUS/mixue4.jpg" alt="mixue4">
+            <img src="imagesUS/mixue5.jpg" alt="mixue5">
+            <img src="imagesUS/mixue6.jpg" alt="mixue6">
+            <img src="imagesUS/mixue7.jpg" alt="mixue7">
+            <img src="imagesUS2/HBDKEVIN1.jpg" alt="HBDKEVIN1">
+            <img src="imagesUS2/HBDKEVIN2.jpg" alt="HBDKEVIN2">
+            <img src="imagesUS2/HBDKEVIN3.jpg" alt="HBDKEVIN3">
+            <img src="imagesUS2/HBDKEVIN4.jpg" alt="HBDKEVIN4">
+            <img src="imagesUS2/HBDKEVIN5.jpg" alt="HBDKEVIN5">
+            <img src="imagesUS2/HBDKEVIN6.jpg" alt="HBDKEVIN6">
+            <img src="imagesUS2/HBDKEVIN7.jpg" alt="HBDKEVIN7">
+        </div>
+    </div>
+
+    <script>
+       document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(".carousel img");
+    const overlay = document.querySelector(".overlay");
+    const carouselContainer = document.querySelector(".carousel-container");
+    let angle = 0;
+    
+    function updateRotation() {
+    const step = 360 / images.length; // Sudut antara setiap gambar
+    const distance = Math.max(2000, images.length * 30); 
+
+    images.forEach((img, index) => {
+        const rotation = step * index + angle;
+        img.style.transform = `rotateX(${rotation}deg) translateZ(${distance}px)`;
+        img.classList.remove("active");
+        img.style.opacity = "0.5"; // Pastikan semua gambar mulai dari opacity rendah
+    });
+
+    // Hitung indeks gambar yang harus aktif
+    let activeIndex = Math.round((360 - angle) / step) % images.length;
+    if (activeIndex < 0) {
+        activeIndex += images.length; // Menghindari nilai negatif saat scroll ke belakang
+    }
+
+    // Terapkan efek "active" ke gambar yang tepat
+    images[activeIndex].classList.add("active");
+    images[activeIndex].style.opacity = "1"; // Pastikan gambar aktif tidak pudar
+}
+
+carouselContainer.addEventListener("wheel", (event) => {
+    event.preventDefault();
+
+    const step = 360 / images.length; // Hitung sudut antar gambar
+    const direction = event.deltaY > 0 ? 1 : -1; // Scroll ke bawah atau atas
+    angle += step * direction; // Pindah ke gambar berikutnya
+
+    // Animasi transisi agar pergerakan lebih smooth
+    images.forEach(img => {
+        img.style.transition = "transform 0.5s ease-out"; 
+    });
+
+    updateRotation();
+}, { passive: false });
+
+    // Panggil fungsi awal
+    updateRotation();
+});
+
+const toggleButton = document.querySelector(".toggle-mode");
+        const loveContainer = document.querySelector(".love-container");
+        let pinkMode = false;
+        let loveInterval;
+        
+        toggleButton.addEventListener("click", () => {
+            document.body.classList.toggle("pink-mode");
+            pinkMode = !pinkMode;
+            toggleButton.textContent = pinkMode ? "Dark Mode" : "Pink Mode";
+            if (pinkMode) {
+                startLoveEffect();
+            } else {
+                clearLoveEffect();
+            }
+        });
+        
+    </script>
+</body>
+</html>
