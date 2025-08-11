@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Scene</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #141414;
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(20,20,20,0.9) 80%, transparent);
+        }
+        .navbar img {
+            width: 120px;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+        .navbar ul li {
+            margin-left: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .navbar ul li a:hover {
+            color: #e50914;
+            transition: color 0.3s ease-in-out;
+        }
+
+        /* game */
+        .step-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+    padding: 20px;
+}
+
+.step-box {
+    background-color: #000;
+    color: white;
+    border-radius: 16px;
+    padding: 30px 20px 40px;
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    text-align: left;
+}
+
+.step-title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.step-subtitle {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.question {
+    background-color: #111;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.answers button {
+    background-color: #e50914;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.answers button:hover {
+    background-color: #b0060f;
+}
+
+.character {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 80px;
+    z-index: 2;
+}
+
+/* Clue langsung kelihatan */
+.clue {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #ffcc00;
+    font-style: italic;
+    display: block; /* langsung tampil */
+}
+
+.step-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* layar penuh */
+    padding: 0 20px;
+}
+
+.character-pengenalan {
+    position: absolute;
+    top: -10px;
+    right: -30px;
+    width: 80px;
+    z-index: 2;
+}
+
+
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <img src="imagesNet/Netflix-Logo-2014-present-removebg-preview.png" alt="Netflix Logo">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Us.html">Us</a></li>
+            <li><a href="Randomscene.html">Random</a></li>
+        </ul>
+    </header>
+
+    <div class="step-container" id="intro-container">
+        <div class="step-box" id="intro-box">
+          <img src="detektif nayara step1.png" alt="Detektif Nayara" class="character-pengenalan">
+          <p id="intro-text" class="question"></p>
+        </div>
+      </div>
+
+ <!-- STEP 1 -->
+<div class="step-container">
+    <div class="step-box">
+      <img src="detektif nayara step1.png" alt="Detektif Nayara" class="character">
+      <div class="step-title">STEP 1</div>
+      <div class="step-subtitle">DETEKTIF NAYARA</div>
+      <p id="step1-question" class="question"></p>
+      <div class="answers">
+        <button onclick="checkAnswer('A')">A. Buku terbuka di halaman 73.</button>
+        <button onclick="checkAnswer('B')">B. Puntung rokok yang masih baru.</button>
+        <button onclick="checkAnswer('C')">C. Kopi masih hangat saat ditemukan.</button>
+      </div>
+      <p id="clue" class="clue">CLUE: Korban Meninggal 3 jam yang lalu, tapi ada yang janggal</p>
+    </div>
+  </div>
+    </p>
+
+    <!-- step 2 -->
+    <div class="step-container" style="display:none;">
+      <div class="step-box">
+        <img src="detektif_nayara_step2.png" alt="Detektif Nayara" class="character">
+        <div class="step-title">STEP 2</div>
+        <div class="step-subtitle">DETEKTIF NAYARA</div>
+        <p id="step2-question" class="question"></p>
+        <div class="answers">
+          <button onclick="checkAnswerStep2('A')">A. Cari tahu arti “TFF” di catatan penjara.</button>
+          <button onclick="checkAnswerStep2('B')">B. Memeriksa kamera keamanan penjara.</button>
+          <button onclick="checkAnswerStep2('C')">C. Mengabaikan tanda "TFF"</button>
+        </div>
+        <p id="clue-step2" class="clue">CLUE: Jejak tinta bikin masalah besar</p>
+      </div>
+    </div>    
+
+    <div id="step3" class="step-container" style="display: none;">
+      <div class="step-box">
+        <img src="detektif-nayara-step3.png" alt="Detektif Nayara" class="character">
+        <div class="step-title">STEP 3</div>
+        <div class="step-subtitle">DETEKTIF NAYARA</div>
+        <p id="step3-question" class="question"></p>
+        <div class="answers">
+          <button onclick="checkAnswerStep3('A')">A. Periksa rekaman keluar-masuk penjara di hari cuti ‘TFF’ tersebut.</button>
+          <button onclick="checkAnswerStep3('B')">B. Cari tahu apakah ada laporan kehilangan narapidana setelah cuti ‘TFF’.</button>
+          <button onclick="checkAnswerStep3('C')">C. Lacak transaksi keuangan Graham McGill selama masa cuti.</button>
+        </div>
+        <p id="clue-step3" class="clue">CLUE: Jejak digital kadang lebih jujur dari kata-kata..</p>
+      </div>
+    </div>    
+
+  <script>
+
+
+/* ----- DOM helpers & container references ----- */
+const stepContainers = Array.from(document.querySelectorAll('.step-container'));
+const introContainer = document.getElementById('intro-container') || stepContainers[0];
+const step1Container = stepContainers[1]; // Step 1
+const step2Container = document.getElementById('step2') || stepContainers[2]; // Step 2 fallback
+const step3Container = document.getElementById('step3'); // Step 3 container
+
+const introTextEl = document.getElementById('intro-text');
+const step1QuestionEl = document.getElementById('step1-question');
+const step2QuestionEl = document.getElementById('step2-question');
+const step3QuestionEl = document.getElementById('step3-question');
+
+const clue1El = document.getElementById('clue');
+const clue2El = document.getElementById('clue-step2');
+const clue3El = document.getElementById('clue-step3');
+
+/* safety check */
+if (!introContainer || !step1Container || !step1QuestionEl) {
+  console.error('Missing required DOM elements. Check .step-container order and element IDs.');
+}
+
+/* ----- initial UI state ----- */
+stepContainers.forEach((c, i) => {
+  c.style.display = i === 0 ? 'flex' : 'none';
+});
+clue1El?.style.setProperty('display', 'block');
+clue2El?.style.setProperty('display', 'block');
+clue3El?.style.setProperty('display', 'block');
+
+/* ----- intro typewriter ----- */
+const introSteps = [ 
+"Halo, kamu masuk ke dunia misteri penuh teka-teki.",
+  "Kamu akan membantu dan berperan sebagai detektif memecahkan kasus.",
+  "Setiap kasus cuma dikasih dua kali kesempatan ya, jadi gak bisa asal nebak.",
+  "Kalau salah dua kali, balik lagi dari awal. Waktu kamu juga terbatas, cuma 20 menit, hati-hati!.",
+  "Yaudah deh daripada ini kasus basi, langsung aja kita pecahin kasusnya ya"
+ 
+];
+let introLine = 0, introChar = 0;
+function typeIntroLine() {
+  if (!introTextEl) return;
+  if (introLine >= introSteps.length) {
+    setTimeout(() => goToStep1(), 1500);
+    return;
+  }
+  const line = introSteps[introLine];
+  if (introChar < line.length) {
+    introTextEl.textContent += line.charAt(introChar);
+    introChar++;
+    setTimeout(typeIntroLine, 30);
+  } else {
+    introLine++;
+    introChar = 0;
+    setTimeout(() => {
+      introTextEl.textContent = "";
+      typeIntroLine();
+    }, 1000);
+  }
+}
+
+/* ----- TIMER ----- */
+let totalSeconds = 20 * 60;
+let timerInterval = null;
+let timerStarted = false;
+
+function ensureTimerElement() {
+  let el = document.getElementById('timer');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'timer';
+    Object.assign(el.style, {
+      position: 'fixed', top: '280px', right: '140px', zIndex: '900',
+      fontSize: '14px', background: 'rgba(0,0,0,0.5)',
+      padding: '6px 10px', borderRadius: '8px'
+    });
+    document.body.appendChild(el);
+  }
+  return el;
+}
+
+function startTimerIfNeeded() {
+  if (timerStarted) return;
+  timerStarted = true;
+  const timerEl = ensureTimerElement();
+  timerEl.textContent = formatTime(totalSeconds);
+  timerInterval = setInterval(() => {
+    totalSeconds--;
+    timerEl.textContent = formatTime(totalSeconds);
+    if (totalSeconds < 0) {
+      clearInterval(timerInterval);
+      alert('Waktu habis! Game Over.');
+      resetToStep1(true);
+      location.reload();
+    }
+  }, 1000);
+}
+
+function formatTime(sec) {
+  if (sec < 0) sec = 0;
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+/* ----- typewriter untuk soal ----- */
+function typeText(text, el, speed = 30, callback) {
+  el.textContent = '';
+  let i = 0;
+  function next() {
+    if (i < text.length) {
+      el.textContent += text.charAt(i);
+      i++;
+      setTimeout(next, speed);
+    } else if (callback) callback();
+  }
+  next();
+}
+
+function typeQuestionStep1() {
+  const q = "Mary McLaughlin ditemukan tewas di apartemennya. Tidak ada tanda-tanda perlawanan. Di meja terdapat secangkir kopi hangat, sebuah buku terbuka di halaman 73, dan puntung rokok yang masih baru di asbak. Apa yang mencurigakan?";
+  typeText(q, step1QuestionEl, 28);
+}
+
+function typeQuestionStep2() {
+  const q = "Tim forensik menemukan DNA pria pada puntung rokok di flat Mary. Setelah dicek di database, hasilnya cocok dengan seorang narapidana kasus pelecehan bernama Graham McGill. Namun, 'TFF' menunjukkan McGill berada di penjara saat pembunuhan. Apa langkah logis yang harus dilakukan detektif selanjutnya?";
+  typeText(q, step2QuestionEl, 28);
+}
+
+function typeQuestionStep3() {
+  const q = "Kamu dan detektif Nayara menemukan bahwa tanda ‘TFF’ di surat penjara ternyata singkatan dari 'Temporary Family Freedom' — cuti singkat untuk tahanan yang dipertimbangkan. Tapi Graham McGill bilang kepada kepolisian jika dia tidak menerima cuti itu. Apa yang harus kamu dan detektif Nayara selidiki sekarang?";
+  typeText(q, step3QuestionEl, 28);
+}
+
+/* ----- attempts tracking ----- */
+const attemptsPerStep = {};
+function resetAttemptsAll() {
+  for (let k in attemptsPerStep) attemptsPerStep[k] = 0;
+}
+
+/* ----- show/hide steps ----- */
+function hideAllSteps() {
+  stepContainers.forEach(c => c.style.display = 'none');
+}
+function goToStep1() {
+  hideAllSteps();
+  introContainer.style.display = 'none';
+  step1Container.style.display = 'flex';
+  attemptsPerStep[1] = 0;
+  startTimerIfNeeded();
+  typeQuestionStep1();
+  clue1El.style.display = 'block';
+  currentStep = 1;
+}
+function goToStep2() {
+  hideAllSteps();
+  step2Container.style.display = 'flex';
+  attemptsPerStep[2] = 0;
+  typeQuestionStep2();
+  clue2El.style.display = 'block';
+  currentStep = 2;
+}
+function goToStep3() {
+  hideAllSteps();
+  step3Container.style.display = 'flex';
+  attemptsPerStep[3] = 0;
+  typeQuestionStep3();
+  clue3El.style.display = 'block';
+  currentStep = 3;
+}
+
+function resetToStep1(fullReset = false) {
+  if (fullReset) return;
+  resetAttemptsAll();
+  goToStep1();
+}
+
+/* ----- sindiran random ----- */
+function sindiranRandom() {
+  const sindiran = [
+    "Masa gitu aja gak bisa?",
+    "Logika mana logika?!",
+    "Waduh... kamu beneran serius nyoba?",
+    "Detektif KW detected.",
+    "Ayo dong mikir dikit lagi."
+  ];
+  return sindiran[Math.floor(Math.random() * sindiran.length)];
+}
+
+/* ----- pesan salah spesifik per step ----- */
+const pesanSalahStep1 = {
+  'A': "Buku halaman 73 itu mungkin petunjuk, tapi belum tepat sebagai jawaban.",
+  'C': "Kopi masih hangat itu menarik, tapi bukan hal paling mencurigakan."
+};
+const pesanSalahStep2 = {
+  'B': "Memeriksa kamera penting, tapi sekarang bukan fokus utama.",
+  'C': "Mengabaikan tanda 'TFF' berarti kehilangan petunjuk penting."
+};
+const pesanSalahStep3 = {
+  'A': "Rekaman penjara bisa membantu, tapi belum cukup bukti.",
+  'C': "Transaksi keuangan penting, tapi masih terlalu jauh dari fakta."
+};
+
+/* ----- current step tracking ----- */
+let currentStep = 0;
+
+/* ----- check answers ----- */
+function checkAnswer(choice) {
+  const stepNum = 1;
+  attemptsPerStep[stepNum] = (attemptsPerStep[stepNum] || 0);
+
+  if (choice === 'B') {
+    alert("Hebat! Ayo kita bawa bukti ini ke tim forensik. Lanjut ke STEP 2.");
+    goToStep2();
+  } else {
+    attemptsPerStep[stepNum]++;
+    if (attemptsPerStep[stepNum] >= 2) {
+      alert("Salah 2x! Balik ke STEP 1.");
+      resetToStep1(false);
+    } else {
+      const sindiran = sindiranRandom();
+      const pesan = pesanSalahStep1[choice] || "Jawaban salah, coba perhatikan lagi petunjuknya.";
+      alert(`${sindiran} ${pesan}`);
+    }
+  }
+}
+
+function checkAnswerStep2(choice) {
+  const stepNum = 2;
+  attemptsPerStep[stepNum] = (attemptsPerStep[stepNum] || 0);
+  const correct = 'A';
+
+  if (choice === correct) {
+    alert("Kamu dan detektif Nayara memeriksa lebih lanjut tentang TFF. Kamu memilih langkah yang benar! Lanjut ke STEP 3.");
+    goToStep3();
+  } else {
+    attemptsPerStep[stepNum]++;
+    if (attemptsPerStep[stepNum] >= 2) {
+      alert("Salah 2x! Balik ke STEP 1.");
+      resetToStep1(false);
+    } else {
+      const sindiran = sindiranRandom();
+      const pesan = pesanSalahStep2[choice] || "Jawaban salah, coba perhatikan lagi petunjuknya.";
+      alert(`${sindiran} ${pesan}`);
+    }
+  }
+}
+
+let attemptsStep3 = 0;
+function checkAnswerStep3(choice) {
+  const correct = 'A';  // jawaban benar step 3
+  
+  if (choice === correct) {
+    alert("Benar! Kamu berhasil menemukan petunjuk penting dari rekaman keluar-masuk penjara.");
+    // Kalau mau lanjut ke step berikutnya, bisa panggil fungsi goToStep4() di sini
+    // goToStep4();
+  } else {
+    attemptsStep3++;
+    if (attemptsStep3 >= 2) {
+      alert("Salah 2x! Balik ke STEP 1.");
+      attemptsStep3 = 0; // reset attempt step 3
+      resetToStep1(false); // langsung ke step 1 tanpa reload halaman
+    } else {
+      // Sindiran + pesan khusus sesuai jawaban salah
+      let pesanSalah = "";
+      if (choice === 'B') {
+        pesanSalah = "Jawaban ini menarik, tapi laporan kehilangan bukan fokus utama sekarang.";
+      } else if (choice === 'C') {
+        pesanSalah = "Transaksi keuangan memang penting, tapi dulu kita harus pastikan cuti dulu.";
+      } else {
+        pesanSalah = "Jawaban salah. Perhatikan clue dan coba lagi!";
+      }
+      alert(`Jawaban salah. ${pesanSalah}`);
+    }
+  }
+}
+
+
+/* ----- start intro typing ----- */
+typeIntroLine();
+
+
+    </script>
+    
+</body>
+</html>

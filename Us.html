@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netflix Snake Grid</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        background: black;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 20px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000;
+        background: linear-gradient(to bottom, rgba(20,20,20,0.9) 10%, transparent);
+    }
+    .navbar img {
+        width: 120px;
+    }
+    .navbar ul {
+        list-style: none;
+        display: flex;
+    }
+    .navbar ul li {
+        margin-left: 20px;
+    }
+    .navbar ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        transition: color 0.3s ease-in-out;
+    }
+    .navbar ul li a:hover {
+        color: #e50914;
+    }
+
+    .snake-wrapper {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        padding: 0 10px;
+    }
+
+    .photo {
+        width: 32vw;
+        max-width: 200px;
+        aspect-ratio: 16/10;
+        background: #333;
+        border-radius: 12px;
+        overflow: hidden;
+        position: absolute;
+    }
+    .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+</head>
+<body>
+
+<header class="navbar">
+    <img src="imagesNet/Netflix-Logo-2014-present-removebg-preview.png" alt="Netflix Logo">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Us</a></li>
+        <li><a href="Randomscene.html">Random</a></li>
+    </ul>
+</header>
+
+<div class="snake-wrapper" id="snakeWrapper">
+</div>
+
+<script>
+    const images = [
+        'imagesUS/first1.jpg', 'imagesUS/first2.jpg', 'imagesUS/first3.jpg',
+        'imagesUS/first4.jpg', 'imagesUS/first5.jpg', 'imagesUS/first6.jpg',
+        'imagesUS/first7.jpg', 'imagesUS/mixue1.jpg', 'imagesUS/mixue2.jpg',
+        'imagesUS/mixue3.jpg', 'imagesUS/mixue4.jpg', 'imagesUS/mixue5.jpg',
+        'imagesUS/mixue6.jpg', 'imagesUS/mixue7.jpg',
+        'imagesUS2/HBDKEVIN1.jpg', 'imagesUS2/HBDKEVIN2.jpg', 'imagesUS2/HBDKEVIN3.jpg',
+        'imagesUS2/HBDKEVIN4.jpg', 'imagesUS2/HBDKEVIN5.jpg', 'imagesUS2/HBDKEVIN6.jpg',
+        'imagesUS2/HBDKEVIN7.jpg',
+    ];
+
+    const wrapper = document.getElementById('snakeWrapper');
+    const photoWidth = window.innerWidth * 0.32;
+    const rowGap = 10;
+    const sidePadding = 10;
+    const startY = window.innerHeight - photoWidth - 30;
+    const navbarHeight = 100;
+    let photos = [];
+
+    images.forEach((src, index) => {
+        const div = document.createElement('div');
+        div.className = 'photo';
+        const img = document.createElement('img');
+        img.src = src;
+        div.appendChild(img);
+        wrapper.appendChild(div);
+
+        photos.push({
+            element: div,
+            x: window.innerWidth + (index * (photoWidth + sidePadding)),
+            y: startY,
+            row: 0,
+            direction: 'left'
+        });
+    });
+
+    function animateSnake() {
+        photos.forEach(photo => {
+            photo.x += (photo.direction === 'left' ? -0.8 : 0.8);
+            photo.element.style.transform = `translate(${photo.x}px, ${photo.y}px)`;
+
+            if (photo.direction === 'left' && photo.x <= -photoWidth - sidePadding) {
+                photo.row++;
+                photo.direction = 'right';
+                photo.x = -photoWidth - sidePadding;
+                photo.y = startY - (photo.row * (photoWidth * 0.7 + rowGap));
+            } else if (photo.direction === 'right' && photo.x >= window.innerWidth + sidePadding) {
+                photo.row++;
+                photo.direction = 'left';
+                photo.x = window.innerWidth + sidePadding;
+                photo.y = startY - (photo.row * (photoWidth * 0.7 + rowGap));
+            }
+
+            if (photo.y < navbarHeight + 10) {
+                photo.row = 0;
+                photo.y = startY;
+                photo.x = window.innerWidth + sidePadding;
+                photo.direction = 'left';
+            }
+        });
+        requestAnimationFrame(animateSnake);
+    }
+
+    animateSnake();
+</script>
+
+</body>
+</html>
